@@ -1,17 +1,24 @@
 const http = require("http");
 const users = require("./mockup/users");
+const routes = require("./routes");
+const UserController = require("./controllers/UserController");
 const log = console.log;
+
+const port = 9090;
 
 const server = http.createServer((request, response) => {
   log(`Request Method: ${request.method} and Request URL ${request.url}`);
-  if (request.method === "GET" && request.url === "/users") {
-    response.writeHead(200, { "Content-Type": "application/json" });
-    // The end method always need receive a string
-    response.end(JSON.stringify(users));
+
+  const route = routes.find((routeObj) => {
+    return (routeObj.endpoint === request.url && routeObj.method === request.method);
+  });
+
+  if (route) {
+    route.handler(request, response);
   } else {
-    response.writeHead(404, { "Content-Type": "text/html" });
-    response.end(`Cannot ${request.method} ${request.url}`);
+    UserController.errorHandling(request, response)
   }
+  
 });
 
-server.listen(9090, console.log("Server its running!"));
+server.listen(port, console.log(`Server is running at: http://localhost:${port}`));
