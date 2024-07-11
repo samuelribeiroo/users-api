@@ -9,5 +9,5 @@ module.exports = {
   errorHandling(request, response) {
     response.writeHead(404, { "Content-Type": "text/html" });
     response.end(`Cannot ${request.method} ${request.url}`);
-  },
-};
+  }
+}
