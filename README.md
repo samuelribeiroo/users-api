@@ -6,12 +6,12 @@ notas de aprendizado 👩‍💻
 
 <h4>Metódos http 👇</h4>
 
-- get -> buscar por um dado 
+- get -> buscar  
 
-- post -> inserir um novo dado 
+- post -> inserir  
 
-- put -> alterar um dado 
+- put -> alterar  
 
-- delete -> remover um dado
+- delete -> remover 
 
 - (existem outros como: patch, head e options, porém, os quatro acima são os mais comuns)
