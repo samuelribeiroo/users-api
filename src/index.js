@@ -1,20 +1,31 @@
 const http = require("http");
-const log = console.log;
 const routes = require("./routes");
-const { isInvalidRequest } = require("./controllers/UserController");
+const url = require("url");
 
 const port = 9090;
+const log = console.log;
 
 const server = http.createServer((request, response) => {
-  log(`Request Method: ${request.method} and Request URL ${request.url}`);
+  const parsedUrl = url.parse(request.url, true);
+  log(parsedUrl);
 
-  const route = routes.find(routeObj => routeObj.endpoint === request.url && routeObj.method === request.method);
+  log(
+    `Request Method: ${request.method} and Request URL ${parsedUrl.pathname}`
+  );
+
+  const route = routes.find(
+    (routeObj) =>
+      routeObj.endpoint === parsedUrl.pathname &&
+      routeObj.method === request.method
+  );
 
   if (route) {
+    request.query = parsedUrl.query;
     route.handler(request, response);
   } else {
-    isInvalidRequest(request, response)
-  }  
+    response.writeHead(404, { "Content-type": "text/html" });
+    response.end(`Cannot ${request.method} ${parsedUrl.pathname}`);
+  }
 });
 
-server.listen(port, console.log(`Server is running at: http://localhost:${port}`));
+server.listen(port, log(`Server is running at: http://localhost:${port}`));
