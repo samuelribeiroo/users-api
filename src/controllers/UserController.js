@@ -19,4 +19,13 @@ module.exports = {
     response.writeHead(404, { "Content-Type": "text/html" });
     response.end(`Cannot ${request.method} ${request.url}`);
   },
+
+  getUsersById(request, response) {
+    const { id } = request.params;
+
+    const user = users.find((user) => user.id === +id);
+
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(user));
+  },
 };
