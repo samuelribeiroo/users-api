@@ -14,16 +14,37 @@ module.exports = {
 
     response.send(200, sortedUsers);
   },
-  
+
   getUsersById(request, response) {
     const { id } = request.params;
 
-    const user = users.find(user => user.id === +id);
+    const user = users.find((user) => user.id === +id);
 
     if (!user) {
       return response.send(400, { message: "User not found." });
     }
 
     response.send(200, user);
+  },
+
+  onCreateUser(request, response) {
+    let body = "";
+
+    request.on("data", chunk => body += chunk);
+
+    request.on("end", () => {
+      body = JSON.parse(body);
+
+      const lastUserID = users[users.length - 1].id;
+
+      const newUser = {
+        id: lastUserID + 1,
+        name: body.name,
+      };
+
+      users.push(newUser)
+
+      response.send(200, newUser);
+    });
   },
 };

@@ -13,4 +13,9 @@ module.exports = [
     handler: UserController.getUsersById,
   },
 
+  {
+    endpoint: "/users",
+    method: "POST",
+    handler: UserController.onCreateUser,
+  },
 ];
