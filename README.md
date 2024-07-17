@@ -1,6 +1,6 @@
 <h3>API com NodeJS (sem frameworks)</h3>
 
-> <p>O repositório contém o código de uma API básica de listagem de usuários que realiza as quatro operações de CRUD, projetada para fins de estudo usando apenas Node.js.</p>
+> <p>O repositório contém o código de uma API básica de listagem de usuários que realiza as quatro operações de um CRUD, projetada para fins de estudo usando apenas Node.js.</p>
 > <p>The repository contains the code for a basic API that allows you to list users and perform basic CRUD operations. It was designed for educational purposes, using only Node.JS without any frameworks.</p>
 
 
