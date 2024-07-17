@@ -49,7 +49,7 @@ module.exports = {
     // ID at mockup used is a string but we need here in format of number (id = Number(id) is same thing to id = +id)
     id = +id;
 
-    const userAlreadyExist = users.find(users => users.id !== id);
+    const userAlreadyExist = users.find(users => users.id === id);
 
     if (!userAlreadyExist) {
       return response.send(400, { error: "User Not Found." });
@@ -58,16 +58,23 @@ module.exports = {
     users = users.map(user => {
       if (user.id === id) {
         return {
-          ...user, 
-          name
+          ...user,
+          name,
         };
       }
 
-      return user
+      return user;
     });
 
-    response.send(200, { id, name })
+    response.send(200, { id, name });
   },
 
-  deleteUser(request, response) {},
+  deleteUser(request, response) {
+    let { id } = request.params;
+    id = +id;
+
+    users = users.filter(user => user.id !== id);
+
+    response.send(200, { deleted: true })
+  },
 };
