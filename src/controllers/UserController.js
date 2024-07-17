@@ -1,4 +1,4 @@
-const users = require("../mockup/users");
+let users = require("../mockup/users");
 
 module.exports = {
   listAllUsers(request, response) {
@@ -41,4 +41,33 @@ module.exports = {
 
     response.send(200, newUser);
   },
+
+  updateUser(request, response) {
+    let { id } = request.params;
+    const { name } = request.body;
+
+    // ID at mockup used is a string but we need here in format of number (id = Number(id) is same thing to id = +id)
+    id = +id;
+
+    const userAlreadyExist = users.find(users => users.id !== id);
+
+    if (!userAlreadyExist) {
+      return response.send(400, { error: "User Not Found." });
+    }
+
+    users = users.map(user => {
+      if (user.id === id) {
+        return {
+          ...user, 
+          name
+        };
+      }
+
+      return user
+    });
+
+    response.send(200, { id, name })
+  },
+
+  deleteUser(request, response) {},
 };
