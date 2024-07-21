@@ -8,7 +8,7 @@
 
 - [ ] POST: Criar Usuário: Um endpoint para criar um novo usuário -> <strong>/users</strong>.
 - [ ] GET: Mostrar Todos os Usuários: Um endpoint para obter uma lista de todos os usuários -> <strong>/users</strong>.
-- [ ] GET: Procurar os Usuários baseados num ID: Um endpoint para obter uma lista de todos os usuários -> <strong>/users/:id</strong>.
+- [ ] GET: Procurar Usuário baseado por ID: Um endpoint para procurar por um usuário baseado no id passado nos query params  -> <strong>/users/:id</strong>.
 - [ ] PUT: Editar Usuário: Um endpoint para atualizar os dados do usuário baseado no id informado nos query params -> <strong>/users/:id</strong>.
 - [ ] DELETE: Excluir Usuário: Um endpoint para excluir usuário baseado no id informado -> <strong>/users/:id</strong>.
 
